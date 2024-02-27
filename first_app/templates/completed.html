@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="width:80%;margin:auto;">
+    <h1>Completed Tasks</h1>
+    {% if tasklist %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Task Title</th>
+            <th scope="col">Task Description</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in tasklist %}
+            {% if item.is_completed == True %}
+          <tr>
+            <td>{{item.taskTitle}}</td>
+            <td>{{item.taskDescription}}</td>
+            <td>
+                <a href="{% url 'delete_task' pk=item.taskTitle %}" class='btn btn-danger btn-sm'>Delete</a>
+            </td>
+          </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+      </table>
+      {% else  %}
+      <h3>No Data Available</h3>
+      {% endif %}
+</div>
+{% endblock %}
